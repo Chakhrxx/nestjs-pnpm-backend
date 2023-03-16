@@ -4,14 +4,13 @@ RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
 WORKDIR /usr/src/app
 
-COPY ./package.json ./pnpm-lock.yaml ./
+COPY --chown=node:node package.json pnpm-lock.yaml ./
 
+RUN pnpm fetch --prod
+
+COPY --chown=node:node . .
 RUN pnpm install
 
-COPY . .
-
-RUN pnpm build
-
-EXPOSE 3000
+USER node
 
 CMD [ "node", "dist/main.js" ]
