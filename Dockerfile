@@ -1,13 +1,15 @@
-FROM node:latest
+FROM node:14.18.0-alpine As development
 
-COPY . /var/www
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
-WORKDIR /var/www
+WORKDIR /usr/src/app
 
-RUN npm install -g pnpm
+COPY ./package.json ./pnpm-lock.yaml ./
+
 RUN pnpm install
+
 RUN pnpm run build
 
 EXPOSE 3000
 
-ENTRYPOINT ["pnpm","start"]
+CMD [ "node", "dist/main.js" ]
