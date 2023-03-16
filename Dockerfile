@@ -1,18 +1,20 @@
-FROM node:latest 
+FROM node:latest
 
-RUN npm i -g pnpm
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 COPY package.json pnpm-lock.yaml ./
 
+COPY . .
+
 RUN pnpm install
+
+COPY /usr/src/app/node_modules ./node_modules
 
 RUN pnpm run build
 
-COPY  /app/dist/ ./dist/
-
-COPY  /app/node_modules ./node_modules
+COPY /usr/src/app/dist ./dist
 
 EXPOSE 3000
 
