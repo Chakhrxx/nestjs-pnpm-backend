@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { NeconfigModule } from 'neconfig';
+import * as path from 'path';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    NeconfigModule.register({
+      readers: [{ name: 'env', file: path.resolve(process.cwd(), '.env') }],
+    }),
+  ],
 })
 export class AppModule {}
