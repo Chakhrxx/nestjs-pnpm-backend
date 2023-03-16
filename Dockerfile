@@ -6,8 +6,6 @@ WORKDIR /usr/src/app
 
 COPY package.json pnpm-lock.yaml ./
 
-COPY . .
-
 RUN pnpm install
 
 COPY /usr/src/app/node_modules ./node_modules
