@@ -1,16 +1,18 @@
-FROM node:latest
+FROM node:latest 
 
-RUN npm install -g pnpm
+RUN npm i -g pnpm
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
-COPY . .
-
 RUN pnpm run build
+
+COPY  /app/dist/ ./dist/
+
+COPY  /app/node_modules ./node_modules
 
 EXPOSE 3000
 
