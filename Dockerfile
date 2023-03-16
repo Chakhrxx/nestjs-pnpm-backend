@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json pnpm-lock.yaml ./
 
-RUN pnpm install --production
+RUN pnpm install
 
 COPY . .
 
