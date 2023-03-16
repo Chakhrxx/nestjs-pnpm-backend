@@ -2,3 +2,5 @@ Dockerfile
 .dockerignore
 npm-debug.log
 .env
+node_modules
+dist
