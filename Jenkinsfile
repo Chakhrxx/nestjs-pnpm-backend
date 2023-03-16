@@ -38,7 +38,7 @@ pipeline {
                 sshTransfer(
                 sourceFiles: '*',
                 remoteDirectory: 'nestjs-pnpm-backend',
-                execCommand: 'cd /home/Chakhree/nestjs-pnpm-backend; docker rmi nestjs-pnpm-image; docker stop nestjs-pnpm-container; docker rm nestjs-pnpm-container; docker build --tag nestjs-pnpm-image .; docker run --detach --name nestjs-pnpm-container --publish 3000:3000 nestjs-pnpm-image'
+                execCommand: 'cd /home/Chakhree/nestjs-pnpm-backend; docker rmi nestjs-pnpm-image; docker stop nestjs-pnpm-container; docker rm nestjs-pnpm-container; docker build --tag nestjs-pnpm-image .; docker run --detach --name nestjs-pnpm-container --publish 5001:5001 nestjs-pnpm-image'
                 )
             ]
             )

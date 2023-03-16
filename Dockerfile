@@ -14,4 +14,6 @@ RUN pnpm install
 
 RUN pnpm build
 
-CMD [ "pnpm", "start:prod" ]
+EXPOSE 3001
+
+ENTRYPOINT ["pnpm","start:prod"]
