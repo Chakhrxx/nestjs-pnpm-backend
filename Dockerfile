@@ -10,6 +10,6 @@ RUN pnpm install --production
 
 COPY . .
 
-EXPOSE 30001
+EXPOSE 3000
 
 CMD ["pnpm", "start"]
