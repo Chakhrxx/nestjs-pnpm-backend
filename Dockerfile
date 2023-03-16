@@ -2,7 +2,5 @@ FROM node:18 As development
 
 WORKDIR /usr/src/app
 
-COPY  . .
-COPY node_modules ./node_modules
-COPY dist ./dist
+COPY  ["Dockerfile","nest-cli.json","package.json","pnpm-lock.yaml","tsconfig.build.json","tsconfig.json","./"]
 ADD src ./src
