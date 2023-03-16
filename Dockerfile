@@ -1,4 +1,4 @@
-FROM node:14.18.0-alpine As development
+FROM node:latest As development
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
