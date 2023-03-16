@@ -1,5 +1,6 @@
-Dockerfile
 .dockerignore
-node_modules
-npm-debug.log
-dist
+.eslintrc.js
+.gitignore
+.prettierrc
+README.md
+/test
