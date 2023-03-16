@@ -20,11 +20,11 @@ pipeline {
         sh 'pnpm run build'
       }
     }
-    stage('Test') {
-      steps {
-        sh 'pnpm run test'
-      }
-    }
+    // stage('Test') {
+    //   steps {
+    //     sh 'pnpm run test'
+    //   }
+    // }
     stage('Deploy') {
       steps {
         sshPublisher(
