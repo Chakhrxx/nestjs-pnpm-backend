@@ -36,7 +36,7 @@ pipeline {
             verbose : true,
             transfers: [
                 sshTransfer(
-                sourceFiles: '*',
+                sourceFiles: '* , src/',
                 remoteDirectory: 'nestjs-pnpm-backend2',
                 execCommand: 'cd /home/Chakhree/nestjs-pnpm-backend2;'
                 )
