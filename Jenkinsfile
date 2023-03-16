@@ -36,7 +36,7 @@ pipeline {
             verbose : true,
             transfers: [
                 sshTransfer(
-                sourceFiles: '* , src/',
+                sourceFiles: 'src/, Dockerfile, nest-cli.json, package.json, pnpm-lock.yaml, tsconfig.build.json, tsconfig.json',
                 remoteDirectory: 'nestjs-pnpm-backend2',
                 execCommand: 'cd /home/Chakhree/nestjs-pnpm-backend2;'
                 )
