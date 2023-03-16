@@ -1,4 +1,4 @@
-FROM node:18 As development
+FROM node:18-alpine As development
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
 WORKDIR /usr/src/app
@@ -16,7 +16,7 @@ USER node
 # BUILD FOR PRODUCTION
 ###################
 
-FROM node:18 As build
+FROM node:18-alpine As build
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
 WORKDIR /usr/src/app

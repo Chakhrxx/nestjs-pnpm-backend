@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "version": "0.0.1",
+  "name": "nestjs-pnpm-backend",
+  "version": "1-alpine",
   "description": "",
   "author": "",
   "private": true,
