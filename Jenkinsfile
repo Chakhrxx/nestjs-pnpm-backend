@@ -4,27 +4,26 @@ pipeline {
   tools {nodejs 'nodejs-16.15.0'}
 
   stages {
-    // stage('Checkout') {
-    //   steps {
-    //     checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Chakhrxx/nestjs-yarn.git']]])
-    //   }
-    // }
+
     stage('Install') {
       steps {
         sh 'npm install -g pnpm'
         sh 'pnpm install'
       }
     }
+
     stage('Build') {
       steps {
         sh 'pnpm run build'
       }
     }
-    // stage('Test') {
-    //   steps {
-    //     sh 'pnpm run test'
-    //   }
-    // }
+
+    stage('Test') {
+      steps {
+        sh 'pnpm run test'
+      }
+    }
+    
     stage('Deploy') {
       steps {
         sshPublisher(
@@ -36,9 +35,9 @@ pipeline {
             verbose : true,
             transfers: [
                 sshTransfer(
-                sourceFiles: 'src/, Dockerfile, nest-cli.json, package.json, pnpm-lock.yaml, tsconfig.build.json, tsconfig.json',
-                remoteDirectory: 'nestjs-pnpm-backend2',
-                execCommand: 'cd /home/Chakhree/nestjs-pnpm-backend; docker rmi nestjs-pnpm-image; docker stop nestjs-pnpm-container; docker rm nestjs-pnpm-container; docker build -t nestjs-pnpm-image .; docker run -d --name nestjs-pnpm-container -p 3000:3000 nestjs-pnpm-image;'
+                sourceFiles: 'src/, Dockerfile, nest-cli.json, package.json, pnpm-lock.yaml, tsconfig.build.json, tsconfig.json, Ansiblefile.yaml',
+                remoteDirectory: 'docker/nestjs-pnpm-backend',
+                execCommand : 'ansible-playbook -v -i /etc/ansible/hosts /home/Chakhree/docker/nestjs-pnpm-backend/Ansiblefile.yaml'
                 )
             ]
             )
