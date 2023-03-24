@@ -36,7 +36,7 @@ pipeline {
             transfers: [
                 sshTransfer(
                 sourceFiles: 'config/, middlewares/, models/, routes/, src/ , Ansiblefile.yaml, Dockerfile, nest-cli.json, package.json, pnpm-lock.yaml, tsconfig.build.json, tsconfig.json',
-                remoteDirectory: 'docker/nestjs-pnpm-backend',
+                remoteDirectory: 'docker/nestjs-pnpm-backend'
                 )
             ]
             )
