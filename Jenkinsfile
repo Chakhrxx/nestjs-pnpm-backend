@@ -12,11 +12,11 @@ pipeline {
       }
     }
 
-    stage('Build') {
-      steps {
-        sh 'pnpm build'
-      }
-    }
+    // stage('Build') {
+    //   steps {
+    //     sh 'pnpm build'
+    //   }
+    // }
 
     // stage('Test') {
     //   steps {
