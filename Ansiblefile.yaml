@@ -1,0 +1,24 @@
+- hosts: Docker
+  tasks:
+    - name: Copy nestjs-pnpm-backend from ansibleHost to aockerHost
+      copy:
+        src: /home/Chakhree/docker/nestjs-pnpm-backend/
+        dest: /home/Chakhree/docker/nestjs-pnpm-backend/
+    - name: Stop and remove nestjs-pnpm-container
+      ansible.builtin.shell: |
+        docker stop nestjs-pnpm-container
+        docker rm nestjs-pnpm-container
+      ignore_errors: true
+    - name: Remove nestjs-pnpm-image
+      ansible.builtin.shell: |
+        docker rmi nestjs-pnpm-image
+      ignore_errors: true
+    - name: Create nestjs-pnpm-image
+      ansible.builtin.shell: |
+        docker build -t nestjs-pnpm-image /home/Chakhree/docker/nestjs-pnpm-backend/
+    - name: Check nestjs-pnpm-image has been created
+      ansible.builtin.shell: |
+        docker image ls
+    - name: Run nestjs-pnpm-container
+      ansible.builtin.shell: |
+        docker run -d --name nestjs-pnpm-container -p 3002:3000 nestjs-pnpm-image
