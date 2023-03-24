@@ -3,7 +3,7 @@
 ###################
 
 FROM node:18-alpine As development
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+RUN npm install -g pnpm
 
 WORKDIR /usr/src/app
 
@@ -21,7 +21,7 @@ USER node
 ###################
 
 FROM node:18-alpine As build
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+RUN RUN npm install -g pnpm
 
 WORKDIR /usr/src/app
 
