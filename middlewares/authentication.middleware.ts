@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { User, UserDocument } from '../model/user.model';
+import { User, UserDocument } from '../models/user.model';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import * as dotenv from 'dotenv';

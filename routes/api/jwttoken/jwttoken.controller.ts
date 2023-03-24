@@ -8,7 +8,7 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 import * as jwt from 'jsonwebtoken';
-import { User, UserDocument } from '../../../model/user.model';
+import { User, UserDocument } from '../../../models/user.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as dotenv from 'dotenv';

@@ -35,7 +35,7 @@ pipeline {
             verbose : true,
             transfers: [
                 sshTransfer(
-                sourceFiles: 'index.ts, Dockerfile, package.json, pnpm-lock.yaml, Ansiblefile.yaml',
+                sourceFiles: '/config, /middlewares, /models, /routes, /src , Ansiblefile.yaml, Dockerfile, nest-cli.json, package.json, pnpm-lock.yaml, tsconfig.build.json, tsconfig.json',
                 remoteDirectory: 'docker/nestjs-pnpm-backend',
                 // execCommand : 'ansible-playbook -v -i /etc/ansible/hosts /home/Chakhree/docker/nestjs-pnpm-backend/Ansiblefile.yaml'
                 )
@@ -44,7 +44,7 @@ pipeline {
         ]
         )
       }
-}
+    }
 
   }
 }

@@ -5,7 +5,7 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from '../model/user.model';
+import { User, UserSchema } from '../models/user.model';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserController } from '../routes/api/user/user.controller';

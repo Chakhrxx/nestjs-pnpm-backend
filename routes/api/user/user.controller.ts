@@ -10,7 +10,7 @@ import {
   Body,
   UseGuards,
 } from '@nestjs/common';
-import { User, UserDocument } from '../../../model/user.model';
+import { User, UserDocument } from '../../../models/user.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Response, NextFunction } from 'express';
