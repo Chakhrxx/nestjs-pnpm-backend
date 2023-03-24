@@ -1,23 +1,51 @@
+###################
+# BUILD FOR LOCAL DEVELOPMENT
+###################
 
-FROM node:18-alpine
+FROM node:18-alpine As development
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
-# Set the working directory to /app
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copy the package.json and pnpm-lock.yaml to the container
-COPY package.json pnpm-lock.yaml /app/
+COPY --chown=node:node pnpm-lock.yaml ./
 
-# Install pnpm globally
-RUN npm install -g pnpm
+RUN pnpm fetch --prod
 
-# Install project dependencies using pnpm
+COPY --chown=node:node . .
 RUN pnpm install
 
-# Copy the rest of the application code to the container
-COPY . /app
+USER node
 
-# Expose port 3000 for the NestJS application
-EXPOSE 3000
+###################
+# BUILD FOR PRODUCTION
+###################
 
-# Start the application in development mode
-CMD ["pnpm", "run", "start:dev"]
+FROM node:18-alpine As build
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+
+WORKDIR /usr/src/app
+
+COPY --chown=node:node pnpm-lock.yaml ./
+
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+
+COPY --chown=node:node . .
+
+RUN pnpm build
+
+ENV NODE_ENV production
+
+RUN pnpm install --prod
+
+USER node
+
+###################
+# PRODUCTION
+###################
+
+FROM node:18-alpine As production
+
+COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+
+CMD [ "node", "dist/src/main.js" ]
