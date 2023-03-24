@@ -1,51 +1,23 @@
-###################
-# BUILD FOR LOCAL DEVELOPMENT
-###################
+# Use the official Node.js v14.x image as the base image
+FROM node:18-alpine
 
-FROM node:18-alpine As development
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the package.json and pnpm-lock.yaml to the container
+COPY package.json pnpm-lock.yaml /app/
+
+# Install pnpm globally
 RUN npm install -g pnpm
 
-WORKDIR /usr/src/app
-
-COPY --chown=node:node pnpm-lock.yaml ./
-
-RUN pnpm fetch --prod
-
-COPY --chown=node:node . .
+# Install project dependencies using pnpm
 RUN pnpm install
 
-USER node
+# Copy the rest of the application code to the container
+COPY . /app
 
-###################
-# BUILD FOR PRODUCTION
-###################
+# Expose port 3000 for the NestJS application
+EXPOSE 3000
 
-FROM node:18-alpine As build
-RUN RUN npm install -g pnpm
-
-WORKDIR /usr/src/app
-
-COPY --chown=node:node pnpm-lock.yaml ./
-
-COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
-
-COPY --chown=node:node . .
-
-RUN pnpm build
-
-ENV NODE_ENV production
-
-RUN pnpm install --prod
-
-USER node
-
-###################
-# PRODUCTION
-###################
-
-FROM node:18-alpine As production
-
-COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /usr/src/app/dist ./dist
-
-CMD [ "node", "dist/src/main.js" ]
+# Start the application in development mode
+CMD ["pnpm", "run", "start:dev"]
