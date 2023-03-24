@@ -21,4 +21,4 @@
         docker image ls
     - name: Run nestjs-pnpm-container
       ansible.builtin.shell: |
-        docker run -d --name nestjs-pnpm-container -p 3002:3000 nestjs-pnpm-image
+        docker run -d --name nestjs-pnpm-container -p 3000:3000 nestjs-pnpm-image
